@@ -1,7 +1,7 @@
 ITKModuleTemplate
 =================
 
-[![Build Status](https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_apis/build/status/InsightSoftwareConsortium.ITKModuleTemplate?branchName=master)](https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_build/latest?definitionId=19&branchName=master)
+[![Build Status](https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_apis/build/status/InsightSoftwareConsortium.ITKModuleTemplate%20(1)?branchName=master)](https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_build/latest?definitionId=23&branchName=master)
 
 Overview
 --------
