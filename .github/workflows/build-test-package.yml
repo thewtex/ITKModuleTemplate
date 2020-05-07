@@ -74,8 +74,8 @@ jobs:
     - name: Evaluate template
       shell: bash
       run: |
-        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/../ITKModuleTemplateEvaluated" "${GITHUB_WORKSPACE}"
-        mkdir "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated/.git"
+        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/../Evaluated" "${GITHUB_WORKSPACE}"
+        mkdir "${GITHUB_WORKSPACE}/../Evaluated/ITKModuleTemplate/.git"
 
     - name: Configure CTest script
       shell: bash
@@ -83,9 +83,9 @@ jobs:
         operating_system="${{ matrix.os }}"
         cat > dashboard.cmake << EOF
         set(CTEST_SITE "GitHubActions")
-        file(TO_CMAKE_PATH "${PWD}/.." CTEST_DASHBOARD_ROOT)
-        file(TO_CMAKE_PATH "${PWD}/ITKModuleTemplateEvaluated" CTEST_SOURCE_DIRECTORY)
-        file(TO_CMAKE_PATH "${PWD}/../build" CTEST_BINARY_DIRECTORY)
+        file(TO_CMAKE_PATH "\$ENV{GITHUB_WORKSPACE}/.." CTEST_DASHBOARD_ROOT)
+        file(TO_CMAKE_PATH "\$ENV{GITHUB_WORKSPACE}/../Evaluated/ITKModuleTemplate" CTEST_SOURCE_DIRECTORY)
+        file(TO_CMAKE_PATH "\$ENV{GITHUB_WORKSPACE}/../build" CTEST_BINARY_DIRECTORY)
         set(dashboard_source_name "${GITHUB_REPOSITORY}")
         if(ENV{GITHUB_REF} MATCHES "master")
           set(branch "-master")
@@ -154,8 +154,9 @@ jobs:
     - name: Evaluate template
       shell: bash
       run: |
-        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated" "${GITHUB_WORKSPACE}"
-        mkdir "${GITHUB_WORKSPACE}/ITKModuleTemplate/.git"
+        python -m pip install cookiecutter
+        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/Evaluated" "${GITHUB_WORKSPACE}"
+        mkdir "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate/.git"
 
     - name: 'Fetch build script'
       run: |
@@ -164,15 +165,15 @@ jobs:
 
     - name: 'Build 🐍 Python 📦 package'
       run: |
-        cd "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated"
+        cd "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate"
         export ITK_PACKAGE_VERSION=${{ matrix.itk-python-git-tag }}
-        ../dockcross-manylinux-download-cache-and-build-module-wheels.sh cp${{ matrix.python-version }}
+        ../../dockcross-manylinux-download-cache-and-build-module-wheels.sh cp${{ matrix.python-version }}
 
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v1
       with:
         name: LinuxWheel${{ matrix.python-version }}
-        path: ITKModuleTemplateEvaluated/dist
+        path: Evaluated/ITKModuleTemplate/dist
 
   build-macos-python-packages:
     runs-on: macos-10.15
@@ -193,21 +194,22 @@ jobs:
     - name: Evaluate template
       shell: bash
       run: |
-        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated" "${GITHUB_WORKSPACE}"
-        mkdir "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated/.git"
+        python -m pip install cookiecutter
+        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/Evaluated" "${GITHUB_WORKSPACE}"
+        mkdir "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate/.git"
 
     - name: 'Build 🐍 Python 📦 package'
       run: |
-        cd "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated"
+        cd "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate"
         export ITK_PACKAGE_VERSION=${{ matrix.itk-python-git-tag }}
         export MACOSX_DEPLOYMENT_TARGET=10.9
-        ../macpython-download-cache-and-build-module-wheels.sh
+        ../../macpython-download-cache-and-build-module-wheels.sh
 
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v1
       with:
         name: MacOSWheels
-        path: ITKModuleTemplateEvaluated/dist
+        path: Evaluated/ITKModuleTemplate/dist
 
   build-windows-python-packages:
     runs-on: windows-2019
@@ -227,16 +229,21 @@ jobs:
         $pythonVersion = "3.${{ matrix.python-version-minor }}"
         iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/scikit-build/scikit-ci-addons/master/windows/install-python.ps1'))
 
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
     - name: Evaluate template
       shell: bash
       run: |
-        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated" "${GITHUB_WORKSPACE}"
-        mkdir "${GITHUB_WORKSPACE}/ITKModuleTemplateEvaluated/.git"
+        python -m pip install cookiecutter
+        python -m cookiecutter --no-input --output-dir "${GITHUB_WORKSPACE}/Evaluated" "${GITHUB_WORKSPACE}"
+        mkdir "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate/.git"
 
     - name: 'Fetch build dependencies'
       shell: bash
       run: |
-        cd ITKModuleTemplate
+        cd Evaluated/ITKModuleTemplate
         curl -L "https://github.com/InsightSoftwareConsortium/ITKPythonBuilds/releases/download/${{ matrix.itk-python-git-tag }}/ITKPythonBuilds-windows.zip" -o "ITKPythonBuilds-windows.zip"
         7z x ITKPythonBuilds-windows.zip -o/c/P -aoa -r
         curl -L "https://data.kitware.com/api/v1/file/5c0ad59d8d777f2179dd3e9c/download" -o "doxygen-1.8.11.windows.bin.zip"
@@ -247,7 +254,7 @@ jobs:
     - name: 'Build 🐍 Python 📦 package'
       shell: cmd
       run: |
-        cd ITKModuleTemplateEvaluated
+        cd Evaluated/ITKModuleTemplate
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         set PATH="C:\P\grep;%PATH%"
         set CC=cl.exe
@@ -258,4 +265,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: WindowWheel3.${{ matrix.python-version-minor }}
-        path: ITKModuleTemplateEvaluated/dist
+        path: Evaluated/ITKModuleTemplate/dist
