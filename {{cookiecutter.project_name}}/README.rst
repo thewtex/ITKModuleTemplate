@@ -1,8 +1,7 @@
 {{ cookiecutter.project_name }}
 =================================
 
-.. image:: https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_apis/build/status/{{ cookiecutter.project_name.lower() }}?branchName=master
-    :target: https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_build/latest?definitionId=8&branchName=master
+.. image:: https://github.com/InsightSoftwareConsortium/{{ cookiecutter.project_name }}/workflows/Build,%20test,%20package/badge.svg
     :alt:    Build Status
 
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.python_package_name }}.svg

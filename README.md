@@ -1,7 +1,7 @@
 ITKModuleTemplate
 =================
 
-[![Build Status](https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_apis/build/status/InsightSoftwareConsortium.ITKModuleTemplate?branchName=master)](https://dev.azure.com/InsightSoftwareConsortium/ITKModules/_build/latest?definitionId=19&branchName=master)
+![](https://github.com/InsightSoftwareConsortium/ITKModuleTemplate/workflows/Build,%20test,%20package/badge.svg)
 
 Overview
 --------
@@ -97,14 +97,15 @@ followlowing contents:
       GIT_TAG abcdef012345
       )
 
-Python Packages
----------------
+CI Testing and Python Packages
+------------------------------
 
 Continuous integration service configurations are included to build
+and test the C++ core of packages across platforms and build binary
 Python packages for Linux, macOS, and Windows. These packages can be
-[downloaded](https://itkpythonpackage.readthedocs.io/en/latest/Build_ITK_Module_Python_packages.html#github-automated-ci-package-builds)
+[downloaded](https://itkpythonpackage.readthedocs.io/en/master/Build_ITK_Module_Python_packages.html#github-automated-ci-package-builds)
 and [uploaded to the Python Package Index
-(PyPI)](https://itkpythonpackage.readthedocs.io/en/latest/Build_ITK_Module_Python_packages.html#upload-the-packages-to-pypi).
+(PyPI)](https://itkpythonpackage.readthedocs.io/en/master/Build_ITK_Module_Python_packages.html#upload-the-packages-to-pypi).
 
 ITKv4 Branch
 ------------
