@@ -14,8 +14,8 @@ itk_add_test(NAME itkMinimalStandardRandomVariateGeneratorTest
 itk_add_test(NAME itk{{ cookiecutter.filter_name }}Test
   COMMAND {{ cookiecutter.module_name }}TestDriver
     --compare
-    ${ITK_TEST_OUTPUT_DIR}/itk{{ cookiecutter.filter_name }}TestOutput.mha
     DATA{Baseline/itk{{ cookiecutter.filter_name }}TestOutput.mha}
+    ${ITK_TEST_OUTPUT_DIR}/itk{{ cookiecutter.filter_name }}TestOutput.mha
   itk{{ cookiecutter.filter_name }}Test
     ${ITK_TEST_OUTPUT_DIR}/itk{{ cookiecutter.filter_name }}TestOutput.mha
   )
