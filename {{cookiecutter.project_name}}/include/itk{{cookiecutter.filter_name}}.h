@@ -43,7 +43,7 @@ public:
   static constexpr unsigned int OutputImageDimension = TOutputImage::ImageDimension;
 
   using InputImageType = TInputImage;
-  using OutputImageType = TInputImage;
+  using OutputImageType = TOutputImage;
   using InputPixelType = typename InputImageType::PixelType;
   using OutputPixelType = typename OutputImageType::PixelType;
 
