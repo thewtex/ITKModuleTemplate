@@ -40,6 +40,9 @@ jobs:
         python -m pip install ninja
         python -m pip install cookiecutter
 
+    - name: Get specific of CMake, Ninja
+      uses: lukka/get-cmake@v3.18.3
+
     - name: Download ITK
       run: |
         cd ..
@@ -189,6 +192,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: 'Specific XCode version'
+      run: |
+        sudo xcode-select -s "/Applications/Xcode_11.7.app"
+
+    - name: Get specific of CMake, Ninja
+      uses: lukka/get-cmake@v3.18.3
+
     - name: 'Fetch build script'
       run: |
         curl -L https://raw.githubusercontent.com/InsightSoftwareConsortium/ITKPythonPackage/master/scripts/macpython-download-cache-and-build-module-wheels.sh -O
@@ -235,6 +245,9 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+
+    - name: Get specific of CMake, Ninja
+      uses: lukka/get-cmake@v3.18.3
 
     - name: Evaluate template
       shell: bash
