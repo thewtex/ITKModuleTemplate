@@ -40,7 +40,7 @@ jobs:
         python -m pip install ninja
         python -m pip install cookiecutter
 
-    - name: Get specific of CMake, Ninja
+    - name: Get specific version of CMake, Ninja
       uses: lukka/get-cmake@v3.18.3
 
     - name: Download ITK
@@ -196,7 +196,7 @@ jobs:
       run: |
         sudo xcode-select -s "/Applications/Xcode_11.7.app"
 
-    - name: Get specific of CMake, Ninja
+    - name: Get specific version of CMake, Ninja
       uses: lukka/get-cmake@v3.18.3
 
     - name: 'Fetch build script'
@@ -246,7 +246,7 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Get specific of CMake, Ninja
+    - name: Get specific version of CMake, Ninja
       uses: lukka/get-cmake@v3.18.3
 
     - name: Evaluate template

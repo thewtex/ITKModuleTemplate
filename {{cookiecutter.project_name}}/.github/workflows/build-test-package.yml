@@ -39,7 +39,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install ninja
 
-    - name: Get specific of CMake, Ninja
+    - name: Get specific version of CMake, Ninja
       uses: lukka/get-cmake@v3.18.3
 
     - name: Download ITK
@@ -181,7 +181,7 @@ jobs:
       run: |
         sudo xcode-select -s "/Applications/Xcode_11.7.app"
 
-    - name: Get specific of CMake, Ninja
+    - name: Get specific version of CMake, Ninja
       uses: lukka/get-cmake@v3.18.3
 
     - name: 'Fetch build script'
@@ -211,7 +211,7 @@ jobs:
           - itk-python-git-tag: "v5.1.2"
 
     steps:
-    - name: Get specific of CMake, Ninja
+    - name: Get specific version of CMake, Ninja
       uses: lukka/get-cmake@v3.18.3
 
     - uses: actions/checkout@v2
