@@ -1,7 +1,7 @@
 {{ cookiecutter.project_name }}
 =================================
 
-.. image:: https://github.com/InsightSoftwareConsortium/{{ cookiecutter.project_name }}/workflows/Build,%20test,%20package/badge.svg
+.. image:: {{ cookiecutter.download_url }}/workflows/Build,%20test,%20package/badge.svg
     :alt:    Build Status
 
 .. image:: https://img.shields.io/pypi/v/{{ cookiecutter.python_package_name }}.svg
