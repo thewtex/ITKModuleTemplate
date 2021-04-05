@@ -29,10 +29,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
       with:
-        python-version: 3.7
+        python-version: 3.8
 
     - name: Install build dependencies
       run: |
@@ -137,7 +137,7 @@ jobs:
       shell: cmd
 
   build-linux-python-packages:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       max-parallel: 2
       matrix:
@@ -156,6 +156,11 @@ jobs:
         sudo rm -rf "/usr/local/share/boost"
         sudo rm -rf "$AGENT_TOOLSDIRECTORY"
         df -h
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
 
     - name: Evaluate template
       shell: bash
@@ -204,6 +209,11 @@ jobs:
         curl -L https://raw.githubusercontent.com/InsightSoftwareConsortium/ITKPythonPackage/master/scripts/macpython-download-cache-and-build-module-wheels.sh -O
         chmod u+x macpython-download-cache-and-build-module-wheels.sh
 
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
     - name: Evaluate template
       shell: bash
       run: |
@@ -248,6 +258,11 @@ jobs:
 
     - name: Get specific version of CMake, Ninja
       uses: lukka/get-cmake@v3.18.3
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
 
     - name: Evaluate template
       shell: bash
