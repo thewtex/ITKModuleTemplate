@@ -52,7 +52,8 @@ public:
 };
 } // namespace
 
-int itk{{ cookiecutter.filter_name }}Test(int argc, char * argv[])
+int
+itk{{ cookiecutter.filter_name }}Test(int argc, char * argv[])
 {
   if (argc < 2)
   {

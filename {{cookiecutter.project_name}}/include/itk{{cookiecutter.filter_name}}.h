@@ -47,7 +47,7 @@ public:
   using InputPixelType = typename InputImageType::PixelType;
   using OutputPixelType = typename OutputImageType::PixelType;
 
-  /** Standard class typedefs. */
+  /** Standard class aliases. */
   using Self = {{ cookiecutter.filter_name }}<InputImageType, OutputImageType>;
   using Superclass = ImageToImageFilter<InputImageType, OutputImageType>;
   using Pointer = SmartPointer<Self>;
@@ -63,11 +63,13 @@ protected:
   {{ cookiecutter.filter_name }}();
   ~{{ cookiecutter.filter_name }}() override = default;
 
-  void PrintSelf(std::ostream & os, Indent indent) const override;
+  void
+  PrintSelf(std::ostream & os, Indent indent) const override;
 
   using OutputRegionType = typename OutputImageType::RegionType;
 
-  void DynamicThreadedGenerateData(const OutputRegionType & outputRegion) override;
+  void
+  DynamicThreadedGenerateData(const OutputRegionType & outputRegion) override;
 
 private:
 #ifdef ITK_USE_CONCEPT_CHECKING

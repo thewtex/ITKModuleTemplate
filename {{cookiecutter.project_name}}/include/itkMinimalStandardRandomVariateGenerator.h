@@ -55,7 +55,7 @@ class {{ cookiecutter.module_name }}_EXPORT MinimalStandardRandomVariateGenerato
 public:
   ITK_DISALLOW_COPY_AND_MOVE(MinimalStandardRandomVariateGenerator);
 
-  /** Standard class typedefs. */
+  /** Standard class aliases. */
   using Self = MinimalStandardRandomVariateGenerator;
   using Superclass = RandomVariateGeneratorBase;
   using Pointer = SmartPointer<Self>;
@@ -72,16 +72,19 @@ public:
   itkNewMacro(Self);
 
   /** initialize with a simple IntegerType */
-  void Initialize(int randomSeed);
+  void
+  Initialize(int randomSeed);
 
   /** Get a variate in the range [0, 1] */
-  double GetVariate() override;
+  double
+  GetVariate() override;
 
 protected:
   MinimalStandardRandomVariateGenerator();
   ~MinimalStandardRandomVariateGenerator() override = default;
 
-  void PrintSelf(std::ostream & os, Indent indent) const override;
+  void
+  PrintSelf(std::ostream & os, Indent indent) const override;
 
 private:
   NormalGeneratorType::Pointer m_NormalGenerator;
