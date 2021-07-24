@@ -9,7 +9,7 @@
     :alt: PyPI Version
 
 .. image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
-    :target: {{ cookiecutter.download_url }}/blob/master/LICENSE
+    :target: {{ cookiecutter.download_url }}/blob/main/LICENSE
     :alt: License
 
 Overview
