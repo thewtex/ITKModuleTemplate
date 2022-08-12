@@ -3,8 +3,8 @@ name: Build, test, package
 on: [push,pull_request]
 
 env:
-  itk-git-tag: "d6acfd26bfcdec606d605beb1301bddfb17c05a6"
-  itk-wheel-tag: "v5.3rc04"
+  itk-git-tag: "v5.3rc04"
+  itk-wheel-tag: "v5.3rc04.post2"
 
 jobs:
   build-test-cxx:
@@ -177,7 +177,11 @@ jobs:
       run: |
         cd "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate"
         export ITK_PACKAGE_VERSION=${{ env.itk-wheel-tag }}
-        ../../dockcross-manylinux-download-cache-and-build-module-wheels.sh cp${{ matrix.python-version }}
+        for tarball in "" "-manylinux2014"; do
+          rm -rf ITKPythonPackage
+          export TARBALL_SPECIALIZATION=${tarball}
+          ../../dockcross-manylinux-download-cache-and-build-module-wheels.sh cp${{ matrix.python-version }}
+        done
 
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v1
