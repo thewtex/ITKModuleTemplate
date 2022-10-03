@@ -158,10 +158,10 @@ jobs:
       run: |
         export ITK_PACKAGE_VERSION=${{ "{{" }} env.itk-wheel-tag {{ "}}" }}
         for tarball in "-manylinux_2_28" "-manylinux2014"; do
-￼          rm -rf ITKPythonPackage
-￼          export TARBALL_SPECIALIZATION=${tarball}
-           ./dockcross-manylinux-download-cache-and-build-module-wheels.sh cp${{ "{{" }} matrix.python-version {{ "}}" }}
-￼        done
+          rm -rf ITKPythonPackage
+          export TARBALL_SPECIALIZATION=${tarball}
+          ./dockcross-manylinux-download-cache-and-build-module-wheels.sh cp${{ "{{" }} matrix.python-version {{ "}}" }}
+        done
 
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v1
