@@ -33,7 +33,7 @@ jobs:
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
+        python-version: "3.8"
 
     - name: Install build dependencies
       run: |
@@ -135,7 +135,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version: [37, 38, 39, 310]
+        python-version: ["37", "38", "39", "310"]
 
     steps:
     - uses: actions/checkout@v2
@@ -209,7 +209,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version-minor: [7, 8, 9, 10]
+        python-version-minor: ["7", "8", "9", "10"]
 
     steps:
     - name: Get specific version of CMake, Ninja
