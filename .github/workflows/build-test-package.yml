@@ -5,6 +5,7 @@ on: [push,pull_request]
 env:
   itk-git-tag: "v5.3.0"
   itk-wheel-tag: "v5.3.0"
+  itk-python-package-tag: "03391ad738438661fff40bfe37a7cfabd171b9b1"
 
 jobs:
   build-test-cxx:
@@ -179,16 +180,18 @@ jobs:
 
     - name: 'Fetch build script'
       run: |
-        curl -L https://raw.githubusercontent.com/InsightSoftwareConsortium/ITKPythonPackage/master/scripts/dockcross-manylinux-download-cache-and-build-module-wheels.sh -O
+        curl -L https://raw.githubusercontent.com/InsightSoftwareConsortium/ITKPythonPackage/${{ env.itk-python-package-tag }}/scripts/dockcross-manylinux-download-cache-and-build-module-wheels.sh -O
         chmod u+x dockcross-manylinux-download-cache-and-build-module-wheels.sh
 
     - name: 'Build 🐍 Python 📦 package'
       run: |
         cd "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate"
         export ITK_PACKAGE_VERSION=${{ env.itk-wheel-tag }}
-        for tarball in "-manylinux_2_28" "-manylinux2014"; do
+        export ITKPYTHONPACKAGE_TAG=${{ env.itk-python-package-tag }}
+        for manylinux_version in "_2_28" "2014"; do
           rm -rf ITKPythonPackage
-          export TARBALL_SPECIALIZATION=${tarball}
+          export MANYLINUX_VERSION=${manylinux_version}
+          echo "Building for manylinux specialization ${MANYLINUX_VERSION}"
           ../../dockcross-manylinux-download-cache-and-build-module-wheels.sh cp${{ matrix.python-version }}
         done
 
@@ -215,7 +218,7 @@ jobs:
 
     - name: 'Fetch build script'
       run: |
-        curl -L https://raw.githubusercontent.com/InsightSoftwareConsortium/ITKPythonPackage/master/scripts/macpython-download-cache-and-build-module-wheels.sh -O
+        curl -L https://raw.githubusercontent.com/InsightSoftwareConsortium/ITKPythonPackage/${{ env.itk-python-package-tag }}/scripts/macpython-download-cache-and-build-module-wheels.sh -O
         chmod u+x macpython-download-cache-and-build-module-wheels.sh
 
     - name: Set up Python 3.8
@@ -234,6 +237,7 @@ jobs:
       run: |
         cd "${GITHUB_WORKSPACE}/Evaluated/ITKModuleTemplate"
         export ITK_PACKAGE_VERSION=${{ env.itk-wheel-tag }}
+        export ITKPYTHONPACKAGE_TAG=${{ env.itk-python-package-tag }}
         export MACOSX_DEPLOYMENT_TARGET=10.9
         ../../macpython-download-cache-and-build-module-wheels.sh
 
@@ -290,12 +294,11 @@ jobs:
         7z x grep-win.zip -o/c/P/grep -aoa -r
 
         # Update step for skbuild issue in v5.3.0 build archive
-        ITK_PYTHON_PACKAGE_TAG=0f5effc39afbf7cb1ac5ab20faa0996ddb12b34d
-        echo "Updating ITKPythonPackage build scripts to ${ITK_PYTHON_PACKAGE_TAG}"
+        echo "Updating ITKPythonPackage build scripts to ${{ env.itk-python-package-tag }}"
         pushd /c/P/IPP
         git remote add InsightSoftwareConsortium https://github.com/InsightSoftwareConsortium/ITKPythonPackage.git --tags
         git fetch InsightSoftwareConsortium
-        git checkout ${ITK_PYTHON_PACKAGE_TAG}
+        git checkout ${{ env.itk-python-package-tag }}
         git status
         popd
 
