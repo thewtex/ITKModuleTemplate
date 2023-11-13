@@ -143,7 +143,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version: ["37", "38", "39", "310", "311"]
+        python-version: ["38", "39", "310", "311"]
 
     steps:
     - uses: actions/checkout@v3
@@ -252,7 +252,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version-minor: ["7", "8", "9", "10", "11"]
+        python-version-minor: ["8", "9", "10", "11"]
 
     steps:
     - uses: actions/checkout@v3
