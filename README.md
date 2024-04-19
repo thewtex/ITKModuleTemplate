@@ -111,6 +111,19 @@ Python packages for Linux, macOS, and Windows. These packages can be
 and [uploaded to the Python Package Index
 (PyPI)](https://itkpythonpackage.readthedocs.io/en/master/Build_ITK_Module_Python_packages.html#upload-the-packages-to-pypi).
 
+pyproject.toml
+--------------
+
+ITK 5.4 added support for [scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/),
+an update to scikit-build classic that supports [PEP
+517](https://peps.python.org/pep-0517/) and other modern Python packaging
+standards configured in the declarative *pyproject.toml* file. While the
+*setup.py* file is still supported in ITK 5.4, migration to *pyproject.toml*
+is encouraged. One important advantage is the generation of Stable ABI wheels
+for Python 3.11+; these packages work with Python 3.11, 3.12,
+3.13, 3.14, etc. To migrate to scikit-build-core, use the pyproject.toml
+template in this repository and remove the *setup.py* file.
+
 ITKv4 Branch
 ------------
 
