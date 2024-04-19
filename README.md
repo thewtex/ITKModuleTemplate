@@ -71,9 +71,9 @@ documentation, and Python package documentation.</dd>
 
 The output of the cookiecutter is a buildable ITK external module with
 example classes. Remove or replace the classes with your new classes.
-Push your new module to GitHub, and enable builds on
-[CircleCI](https://circleci.com/), [TravisCI](https://travis-ci.org/),
-and [AppVeyor](https://www.appveyor.com/).
+Push your new module to GitHub. Cross-platform C++ testing and Python
+packaging is provided via the [ITKRemoteModuleBuildTestPackageAction]
+reusable GitHub Action.
 
 Documentation on [how to populate the
 module](https://itk.org/ITKSoftwareGuide/html/Book1/ITKSoftwareGuide-Book1ch9.html#x50-1430009)
@@ -106,13 +106,11 @@ CI Testing and Python Packages
 
 Continuous integration service configurations are included to build
 and test the C++ core of packages across platforms and build binary
-Python packages for Linux, macOS, and Windows. These packages can be
-[downloaded](https://itkpythonpackage.readthedocs.io/en/master/Build_ITK_Module_Python_packages.html#github-automated-ci-package-builds)
-and [uploaded to the Python Package Index
-(PyPI)](https://itkpythonpackage.readthedocs.io/en/master/Build_ITK_Module_Python_packages.html#upload-the-packages-to-pypi).
+Python packages for Linux, macOS, and Windows. For more information, see
+the [ITKRemoteModuleBuildTestPackageAction] documentation.
 
-pyproject.toml
---------------
+pyproject.toml migration
+------------------------
 
 ITK 5.4 added support for [scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/),
 an update to scikit-build classic that supports [PEP
@@ -147,3 +145,5 @@ Authors
 -   Bradley Lowekamp
 -   Matt McCormick
 -   Jean-Baptiste VIMORT
+
+[ITKRemoteModuleBuildTestPackageAction]: https://github.com/InsightSoftwareConsortium/ITKRemoteModuleBuildTestPackageAction
