@@ -153,7 +153,7 @@ jobs:
         python-version: ["38", "39", "310", "311"]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: 'Free up disk space'
       run: |
@@ -203,7 +203,7 @@ jobs:
         done
 
     - name: Publish Python package as GitHub Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: LinuxWheel3${{ matrix.python-version }}
         path: Evaluated/ITKModuleTemplate/dist
@@ -251,7 +251,7 @@ jobs:
         ../../macpython-download-cache-and-build-module-wheels.sh
 
     - name: Publish Python package as GitHub Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: MacOSWheel3${{ matrix.python-version }}
         path: Evaluated/ITKModuleTemplate/dist
@@ -264,7 +264,7 @@ jobs:
         python-version-minor: ["8", "9", "10", "11"]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: 'Install Python'
       run: |
@@ -272,7 +272,7 @@ jobs:
         $pythonVersion = "3.${{ matrix.python-version-minor }}"
         iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/scikit-build/scikit-ci-addons/master/windows/install-python.ps1'))
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.x'
 
@@ -322,7 +322,7 @@ jobs:
         C:\Python3${{ matrix.python-version-minor }}-x64\python.exe C:\P\IPP\scripts\windows_build_module_wheels.py --py-envs "3${{ matrix.python-version-minor }}-x64"
 
     - name: Publish Python package as GitHub Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WindowsWheel3.${{ matrix.python-version-minor }}
         path: Evaluated/ITKModuleTemplate/dist
