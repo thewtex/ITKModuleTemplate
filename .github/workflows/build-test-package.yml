@@ -253,7 +253,7 @@ jobs:
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: MacOSWheels
+        name: MacOSWheels${{ matrix.python-version }}
         path: Evaluated/ITKModuleTemplate/dist
 
   build-windows-python-packages:
