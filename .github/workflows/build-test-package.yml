@@ -205,7 +205,7 @@ jobs:
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: LinuxWheel${{ matrix.python-version }}
+        name: LinuxWheel3${{ matrix.python-version }}
         path: Evaluated/ITKModuleTemplate/dist
 
   build-macos-python-packages:
@@ -253,7 +253,7 @@ jobs:
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: MacOSWheels
+        name: MacOSWheel3${{ matrix.python-version }}
         path: Evaluated/ITKModuleTemplate/dist
 
   build-windows-python-packages:
@@ -324,5 +324,5 @@ jobs:
     - name: Publish Python package as GitHub Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: WindowWheel3.${{ matrix.python-version-minor }}
+        name: WindowsWheel3.${{ matrix.python-version-minor }}
         path: Evaluated/ITKModuleTemplate/dist
