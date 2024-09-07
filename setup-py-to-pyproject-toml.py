@@ -33,9 +33,6 @@ def setup_py_to_pyproject_toml(setup_python_path):
 
     runpy.run_path(setup_python_path)
 
-    # with open(setup_python_path, 'r') as f:
-    #     setup_py = f.read()
-
     project_name = capture['name']
     current_version = Version(capture['version'])
     project_version = f'{current_version.major}.{current_version.minor + 1}.0'
@@ -46,6 +43,7 @@ def setup_py_to_pyproject_toml(setup_python_path):
     project_classifiers = capture['classifiers']
     project_packages = capture['packages']
     project_install = capture['install_requires']
+    project_keywords = capture.get('keywords', "itk").split()
 
     # Load the file "./{{cookiecutter.project_name}}/pyproject.toml" as the pyproject.toml template
     script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -60,6 +58,12 @@ def setup_py_to_pyproject_toml(setup_python_path):
     template = template.replace('{{ cookiecutter.full_name }}', project_author)
     template = template.replace('{{ cookiecutter.email }}', project_author_email)
     template = template.replace('{{ cookiecutter.download_url }}', project_url)
+    template = template.replace(
+        'keywords = [\n    "itk",\n]',
+        "keywords = [\n{0}\n]".format(
+            '\n'.join([f'    "{keyword}",' for keyword in project_keywords])
+        )
+    )
 
     setup_dirname = os.path.dirname(setup_python_path)
     if os.path.exists(os.path.join(setup_dirname, 'README.md')):
